@@ -35,10 +35,6 @@ def one_step_train(model,
         y_pred_class = torch.argmax(torch.softmax(y_pred, dim=1), dim=1)
         train_acc += ((y_pred_class == y).sum().item())/len(y_pred)
 
-        if batch % 10 == 0:
-            print(f'loss : {loss.item()}')
-            print(f'acc : {((y_pred_class == y).sum().item())/len(y_pred)}')
-
 
     train_loss = train_loss/len(train_dataloader)
     train_acc = train_acc/len(train_dataloader)
@@ -66,11 +62,6 @@ def one_step_test(model,
 
         y_pred_class = torch.argmax(torch.softmax(y_pred, dim=1), dim=1)
         test_acc += ((y_pred_class == y).sum().item())/len(y_pred)
-
-        if batch % 10 == 0:
-            print(f'batch {batch}')
-            print(f'loss : {loss.item()}')
-            print(f'acc : {((y_pred_class == y).sum().item())/len(y_pred)}')
 
 
     test_loss = test_loss/len(test_dataloader)
@@ -118,7 +109,9 @@ def train(model,
           f"test_loss: {test_loss:.4f} | "
           f"test_acc: {test_acc:.4f}"
         )
-        
+
+
+    return results  
         
 
 
